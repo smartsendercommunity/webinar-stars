@@ -67,7 +67,7 @@ for($p=1; $p<=$ps; $p++) {
 $funnelList = '<option value="">Не подписывать</option>'.implode("", $funnelOption);
 
 
-$webinarFields = ["name","email","phone","city","date_start","date_end","buttons","comments","webinarId","webinarName","webinarStart","webinarEnd","webinarDuration","duration","messages", "text%", "date%[format]%[date/offset]"];
+$webinarFields = ["name","email","phone","city","date_start","date_end","buttons","webinarId","webinarName","webinarStart","webinarEnd","webinarDuration","duration","messages", "text%", "date%[format]%[date/offset]"];
 
 $datalist = '<datalist id="webinar-data"><option>'.implode("</option><option>", $webinarFields).'</option></datalist>';
 
