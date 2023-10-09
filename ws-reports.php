@@ -78,6 +78,7 @@ if ($report["report"]["visitors"] != NULL && is_array($report["report"]["visitor
             $phone = str_ireplace([" ", "(", ")", "-", "+", "'"], "", $contact["values"]["phone"]);
             if ($contactId == NULL) {
                 $search = json_decode(send_bearer("https://api.smartsender.com/v1/contacts/search?page=1&limitation=1&term=".urlencode($phone), $ssKey), true);
+                $log["contact"]["search"]["phone"] = $search;
                 if ($search["collection"][0]["id"] != NULL) {
                     $contactId = $search["collection"][0]["id"];
                 }
@@ -87,6 +88,7 @@ if ($report["report"]["visitors"] != NULL && is_array($report["report"]["visitor
             $email = strtolower($contact["values"]["email"]);
             if ($contactId == NULL) {
                 $search = json_decode(send_bearer("https://api.smartsender.com/v1/contacts/search?page=1&limitation=1&term=".urlencode($email), $ssKey), true);
+                $log["contact"]["search"]["email"] = $search;
                 if ($search["collection"][0]["id"] != NULL) {
                     $contactId = $search["collection"][0]["id"];
                 }
@@ -115,6 +117,8 @@ if ($report["report"]["visitors"] != NULL && is_array($report["report"]["visitor
                     "result" => json_decode(send_bearer("https://api.smartsender.com/v1/contacts/".$contactId."/funnels/".$funnelId), true),
                 ];
             }
+        } else {
+            $log["contact"]["id"] = "not found";
         }
         
         
