@@ -74,8 +74,8 @@ if ($report["report"]["visitors"] != NULL && is_array($report["report"]["visitor
         if ($oneVisitor["ssId"] != NULL) {
             $contactId = $oneVisitor["ssId"];
         }
-        if ($contact["values"]["phone"] != NULL) {
-            $phone = str_ireplace([" ", "(", ")", "-", "+", "'"], "", $contact["values"]["phone"]);
+        if ($oneVisitor["phone"] != NULL) {
+            $phone = str_ireplace([" ", "(", ")", "-", "+", "'"], "", $oneVisitor["phone"]);
             if ($contactId == NULL) {
                 $search = json_decode(send_bearer("https://api.smartsender.com/v1/contacts/search?page=1&limitation=1&term=".urlencode($phone), $ssKey), true);
                 $log["contact"]["search"]["phone"] = $search;
@@ -84,8 +84,8 @@ if ($report["report"]["visitors"] != NULL && is_array($report["report"]["visitor
                 }
             }
         }
-        if ($contact["values"]["email"] != NULL) {
-            $email = strtolower($contact["values"]["email"]);
+        if ($oneVisitor["email"] != NULL) {
+            $email = strtolower($oneVisitor["email"]);
             if ($contactId == NULL) {
                 $search = json_decode(send_bearer("https://api.smartsender.com/v1/contacts/search?page=1&limitation=1&term=".urlencode($email), $ssKey), true);
                 $log["contact"]["search"]["email"] = $search;
@@ -97,12 +97,10 @@ if ($report["report"]["visitors"] != NULL && is_array($report["report"]["visitor
         // Обновление контакта
         if ($contactId != NULL) {
             if ($contact["values"] != NULL) {
-                $log["contact"] = [
-                    "id" => $contactId,
-                    "updates" => [
-                        "send" => $contact,
-                        "result" => json_decode(send_bearer("https://api.smartsender.com/v1/contacts/".$contactId, $ssKey, "PUT", $contact), true),
-                    ],
+                $log["contact"]["id"] = $contactId;
+                $log["contact"]["updates"] = [
+                    "send" => $contact,
+                    "result" => json_decode(send_bearer("https://api.smartsender.com/v1/contacts/".$contactId, $ssKey, "PUT", $contact), true),
                 ];
             }
             if ($tagId != NULL) {
