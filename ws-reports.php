@@ -1,7 +1,7 @@
 <?php
 
-if (file_exists("settings.json")) {
-    $settings = json_decode(file_get_contents("settings.json"), true);
+if (file_exists(dirname($_SERVER["SCRIPT_FILENAME"])."/settings.json")) {
+    $settings = json_decode(file_get_contents(dirname($_SERVER["SCRIPT_FILENAME"])."/settings.json"), true);
 } else {
     exit;
 }
