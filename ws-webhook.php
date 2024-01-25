@@ -52,7 +52,7 @@ if ($report["visitors"] != NULL) {
 }
 $log["report"]["modified"] = $report;
 
-if ($data["visitors_count"] <= 10) {
+if (count($report["visitors"]) <= 10) {
     // Отправка сразу на скрипт
     include("ws-reports.php");
     echo json_encode($result);
