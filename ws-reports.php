@@ -106,13 +106,13 @@ if ($report["report"]["visitors"] != NULL && is_array($report["report"]["visitor
             if ($tagId != NULL) {
                 $log["contact"]["tag"] = [
                     "id" => $tagId,
-                    "result" => json_decode(send_bearer("https://api.smartsender.com/v1/contacts/".$contactId."/tags/".$tagId), true),
+                    "result" => json_decode(send_bearer("https://api.smartsender.com/v1/contacts/".$contactId."/tags/".$tagId, $ssKey, "POST"), true),
                 ];
             }
             if ($funnelId != NULL) {
                 $log["contact"]["funnel"] = [
                     "id" => $funnelId,
-                    "result" => json_decode(send_bearer("https://api.smartsender.com/v1/contacts/".$contactId."/funnels/".$funnelId), true),
+                    "result" => json_decode(send_bearer("https://api.smartsender.com/v1/contacts/".$contactId."/funnels/".$funnelId, $ssKey, "POST"), true),
                 ];
             }
         } else {
